@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Basic -->
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!-- Site Metas -->
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <link rel="shortcut icon" href="{% static 'images/local.png' %}" type="">
+      <title>Local school Register</title>
+      <!-- bootstrap core css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+      <!-- font awesome style -->
+      <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+      <!-- responsive style -->
+      <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+      <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+   </head>
+   <body class="sub_page">
+      <div class="hero_area">
+         <!-- header section strats -->
+         <header class="header_section">
+            <div class="container">
+               <nav class="navbar navbar-expand-lg custom_nav-container ">
+                  <a class="navbar-brand" href="{% url 'shop:home' %}"><img width="250" src="{% static 'images/logo2.png' %}" alt="#" /></a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class=""> </span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav">
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'shop:home' %} ">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+            </div>
+         </header>
+         <!-- end header section -->
+      </div>
+      <!-- inner page section -->
+      <section class="inner_page_head">
+         <div class="container_fuild">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full">
+                     <h3>Form</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end inner page section -->
+      <!-- why section -->
+      <section class="why_section layout_padding">
+         <div class="container">
+
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+                     <form action="forms" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                           <input type="text" placeholder="Enter your name" name="name" required />
+                        <label>DOB :</label><input type="date" placeholder="Enter your date of birth" name="dob" required />
+                           <input type="number" placeholder="Enter your Age" name="age" required />
+                           <label>Gender</label><br>
+                              <label for="male">Male<input type="radio" id="male" name="gender"  value="Male"></label>
+                              <label for="female">Female <input type="radio" id="female" name="gender" value="Female"></label><br>
+                           <input type="tel"  placeholder="Enter your phone number" name="phone" required minlength="4" maxlength="10" size="10"/>
+                           <input type="email" placeholder="Enter your email address" name="email" required />
+                           <textarea placeholder="Enter your address" name="address" required></textarea>
+
+                           {{ form.as_p }}
+
+
+                           <select id="purpose" required>
+                              <option value="purpose">select purpose</option>
+                              <option value="Enquiry">Enquiry</option>
+                               <option value="place order" >Place order</option>
+                               <option value="return" >Return</option>
+
+                           </select><br><br>
+                           <label> Material provided :</label><br>
+                              <label for="Note book">Note book<input type="checkbox" id="note book" name="material provided" value="Note book"></label>
+                              <label for="Pen">Pen<input type="checkbox" id="pen" name="material provided" value="Pen"></label>
+                              <label for="Exam pepper">Exam pepper<input type="checkbox" id="exam pepper" name="material provided" value="Exam pepper"></label>
+                              <label for="Sports kits">Sports kit<input type="checkbox" id="sports kits" name="material provided" value="Sports kit"></label>
+                           <label for="uniform">Uniform<input type="checkbox" id="uniform" name="material provided" value="uniform"></label>
+                           <label for="bag">Bag<input type="checkbox" id="bag" name="material provided" value="bag"></label>
+                           <input type="submit" value="Submit" />
+                        </fieldset>
+                     </form>
+                     {% for j in messages %}
+                     {% if j.tags == 'success' %}
+                     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+                     <script>
+                     $(document).ready(function(){
+                     $("#myMessage").modal('show');
+                     });
+                     </script>
+                    {% endif %}
+                     {% endfor %}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end why section -->
+      <!-- Modal -->
+<div class="modal fade" id="myMessage" tabindex="-1" aria-labelledby="myMessageLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="myMessageLabel"><i class="fas fa-biohazard"></i>&nbsp;&nbsp; Perfect</h1>
+
+      </div>
+      <div class="modal-body text-center">
+        <div class="text-center text-success mt-12">
+        </div><br>
+         <div class="mb-6" style="color:#a5dc86;"><h4>Sent Successfully! </h4></div>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'shop:home' %}"> <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" style="width: 65px;">OK</button></a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- footer section -->
+      <footer class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4 footer-col">
+                  <div class="footer_contact">
+                     <h4>
+                        Reach at..
+                     </h4>
+                     <div class="contact_link_box">
+                        <a href="">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <span>
+                        Location
+                        </span>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <span>
+                        Call +01 1234567890
+                        </span>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span>
+                        demo@gmail.com
+                        </span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 footer-col">
+                  <div class="footer_detail">
+                     <a href="index.html" class="footer-logo">
+                     Local School
+                     </a>
+                     <p>
+                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+                     </p>
+                     <div class="footer_social">
+                        <a href="">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-pinterest" aria-hidden="true"></i>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 footer-col">
+                  <div class="map_container">
+                     <div class="map">
+                        <div id="googleMap"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-info">
+               <div class="col-lg-7 mx-auto px-0">
+                  <p>
+                     &copy; <span id="displayYear"></span> All Rights Reserved By
+                     <a href="{% url 'shop:home' %}">Local School</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- footer section -->
+      <!-- jQery -->
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+      <!-- popper js -->
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <!-- bootstrap js -->
+      <script src="{% static 'js/bootstrap.js' %}"></script>
+      <!-- custom js -->
+      <script src="{% static 'js/custom.js' %}"></script>
+   </body>
+</html>
